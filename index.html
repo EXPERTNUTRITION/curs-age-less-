@@ -1,1 +1,472 @@
 
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGE-LESS - Ghidul Tău pentru o Viață Sănătoasă</title>
+    <style>
+        body {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 3.5em;
+            margin: 0;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-size: 1.3em;
+            color: #666;
+            margin: 20px 0 0 0;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .section h2 {
+            color: #667eea;
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .calculator {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .calculator h2 {
+            color: white;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.9);
+            box-sizing: border-box;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+            margin: 10px 5px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-white {
+            background: white;
+            color: #667eea;
+        }
+
+        .result {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .meal-plans {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .meal-plan {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .meal-plan:hover {
+            transform: translateY(-5px);
+        }
+
+        .meal-plan h3 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .meal-list {
+            text-align: left;
+            margin: 15px 0;
+        }
+
+        .meal-list li {
+            margin: 8px 0;
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .tip-card {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .tip-card h4 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5em;
+            }
+            
+            .form-row {
+                flex-direction: column;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌟 AGE-LESS</h1>
+            <p>Ghidul tău complet pentru o viață sănătoasă și plină de energie</p>
+        </div>
+
+        <div class="section calculator">
+            <h2>🧮 Calculator Calorii Personalizat</h2>
+            <form id="calorieForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="age">Vârsta (ani):</label>
+                        <input type="number" id="age" required min="18" max="100">
+                    </div>
+                    <div class="form-group">
+                        <label for="gender">Sexul:</label>
+                        <select id="gender" required>
+                            <option value="">Selectează</option>
+                            <option value="male">Masculin</option>
+                            <option value="female">Feminin</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="weight">Greutatea (kg):</label>
+                        <input type="number" id="weight" required min="30" max="200">
+                    </div>
+                    <div class="form-group">
+                        <label for="height">Înălțimea (cm):</label>
+                        <input type="number" id="height" required min="120" max="220">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="activity">Nivelul de activitate:</label>
+                    <select id="activity" required>
+                        <option value="">Selectează nivelul</option>
+                        <option value="1.2">Sedentar (fără exerciții)</option>
+                        <option value="1.375">Ușor activ (exerciții ușoare 1-3 zile/săptămână)</option>
+                        <option value="1.55">Moderat activ (exerciții moderate 3-5 zile/săptămână)</option>
+                        <option value="1.725">Foarte activ (exerciții intense 6-7 zile/săptămână)</option>
+                        <option value="1.9">Extrem de activ (exerciții foarte intense, muncă fizică)</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-white">Calculează Caloriile</button>
+            </form>
+
+            <div id="calorieResult" class="result hidden">
+                <h3>Rezultatele tale:</h3>
+                <p id="bmrResult"></p>
+                <p id="caloriesResult"></p>
+                <p id="recommendationResult"></p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🍽️ Planuri de Mese Recomandate</h2>
+            <div class="meal-plans">
+                <div class="meal-plan">
+                    <h3>Plan pentru Slăbire</h3>
+                    <p><strong>1200-1500 calorii/zi</strong></p>
+                    <ul class="meal-list">
+                        <li><strong>Mic dejun:</strong> Ovăz cu fructe și nuci (300 cal)</li>
+                        <li><strong>Gustare:</strong> Iaurt grecesc cu miere (150 cal)</li>
+                        <li><strong>Prânz:</strong> Salată cu pui și legume (400 cal)</li>
+                        <li><strong>Gustare:</strong> Măr cu unt de migdale (200 cal)</li>
+                        <li><strong>Cină:</strong> Pește cu legume la abur (450 cal)</li>
+                    </ul>
+                    <button class="btn" onclick="showMealDetails('weight-loss')">Vezi Detalii</button>
+                </div>
+
+                <div class="meal-plan">
+                    <h3>Plan pentru Menținere</h3>
+                    <p><strong>1800-2200 calorii/zi</strong></p>
+                    <ul class="meal-list">
+                        <li><strong>Mic dejun:</strong> Omletă cu legume și pâine integrală (450 cal)</li>
+                        <li><strong>Gustare:</strong> Smoothie cu fructe (250 cal)</li>
+                        <li><strong>Prânz:</strong> Quinoa cu legume și proteină (550 cal)</li>
+                        <li><strong>Gustare:</strong> Nuci și fructe uscate (300 cal)</li>
+                        <li><strong>Cină:</strong> Carne slabă cu cartofi dulci (650 cal)</li>
+                    </ul>
+                    <button class="btn" onclick="showMealDetails('maintenance')">Vezi Detalii</button>
+                </div>
+
+                <div class="meal-plan">
+                    <h3>Plan pentru Creștere Masă</h3>
+                    <p><strong>2500-3000 calorii/zi</strong></p>
+                    <ul class="meal-list">
+                        <li><strong>Mic dejun:</strong> Ovăz cu banană și unt de arahide (600 cal)</li>
+                        <li><strong>Gustare:</strong> Shake proteic cu fructe (400 cal)</li>
+                        <li><strong>Prânz:</strong> Paste integrale cu carne și sos (700 cal)</li>
+                        <li><strong>Gustare:</strong> Sandwich cu avocado (450 cal)</li>
+                        <li><strong>Cină:</strong> Somon cu orez și legume (850 cal)</li>
+                    </ul>
+                    <button class="btn" onclick="showMealDetails('muscle-gain')">Vezi Detalii</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>💡 Sfaturi pentru o Viață Sănătoasă</h2>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h4>💧 Hidratare</h4>
+                    <p>Bea cel puțin 8 pahare de apă pe zi. Apa ajută la metabolizarea grăsimilor și menține pielea sănătoasă.</p>
+                </div>
+                <div class="tip-card">
+                    <h4>🏃‍♀️ Exerciții</h4>
+                    <p>Fă cel puțin 150 de minute de exerciții moderate pe săptămână. Combină cardio cu antrenamente de forță.</p>
+                </div>
+                <div class="tip-card">
+                    <h4>😴 Somn</h4>
+                    <p>Dormi 7-9 ore pe noapte. Somnul de calitate este esențial pentru recuperare și metabolism.</p>
+                </div>
+                <div class="tip-card">
+                    <h4>🥗 Nutriție</h4>
+                    <p>Consumă 5 porții de fructe și legume zilnic. Alege alimente integrale și evită procesatele.</p>
+                </div>
+                <div class="tip-card">
+                    <h4>🧘‍♀️ Stres</h4>
+                    <p>Practică tehnici de relaxare zilnic. Meditația și yoga reduc stresul și îmbunătățesc sănătatea.</p>
+                </div>
+                <div class="tip-card">
+                    <h4>📱 Tehnologie</h4>
+                    <p>Limitează timpul petrecut la ecrane. Fă pauze regulate și ieși în natură pentru echilibru.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('calorieForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const age = parseInt(document.getElementById('age').value);
+            const gender = document.getElementById('gender').value;
+            const weight = parseFloat(document.getElementById('weight').value);
+            const height = parseFloat(document.getElementById('height').value);
+            const activity = parseFloat(document.getElementById('activity').value);
+            
+            // Calculează BMR folosind formula Mifflin-St Jeor
+            let bmr;
+            if (gender === 'male') {
+                bmr = 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age);
+            } else {
+                bmr = 447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age);
+            }
+            
+            // Calculează caloriile totale necesare
+            const totalCalories = Math.round(bmr * activity);
+            
+            // Calculează caloriile pentru diferite obiective
+            const weightLoss = Math.round(totalCalories - 500);
+            const weightGain = Math.round(totalCalories + 500);
+            
+            // Afișează rezultatele
+            document.getElementById('bmrResult').textContent = `Metabolismul tău bazal (BMR): ${Math.round(bmr)} calorii/zi`;
+            document.getElementById('caloriesResult').textContent = `Caloriile necesare pentru menținere: ${totalCalories} calorii/zi`;
+            
+            let recommendation = `
+                • Pentru slăbire: ${weightLoss} calorii/zi
+                • Pentru menținere: ${totalCalories} calorii/zi  
+                • Pentru creștere în greutate: ${weightGain} calorii/zi
+            `;
+            
+            document.getElementById('recommendationResult').innerHTML = recommendation.replace(/\n/g, '<br>');
+            document.getElementById('calorieResult').classList.remove('hidden');
+            
+            // Scroll la rezultate
+            document.getElementById('calorieResult').scrollIntoView({ behavior: 'smooth' });
+        });
+        
+        function showMealDetails(planType) {
+            const plans = {
+                'weight-loss': {
+                    title: 'Plan Detaliat pentru Slăbire',
+                    details: `
+                        <h3>Săptămâna 1-2: Adaptare (1200-1300 cal/zi)</h3>
+                        <p><strong>Luni:</strong></p>
+                        <ul>
+                            <li>Mic dejun: Ovăz (40g) + lapte de migdale + afine (280 cal)</li>
+                            <li>Gustare: Iaurt grecesc 0% (150g) + miere (1 lingură) (180 cal)</li>
+                            <li>Prânz: Salată verde + piept de pui (100g) + ulei de măsline (1 lingură) (350 cal)</li>
+                            <li>Gustare: Măr mediu + unt de migdale (1 lingură) (220 cal)</li>
+                            <li>Cină: Somon (100g) + broccoli + conopidă la abur (370 cal)</li>
+                        </ul>
+                        
+                        <h3>Săptămâna 3-4: Consolidare (1300-1400 cal/zi)</h3>
+                        <p>Adaugă 100-150 calorii prin porții mai mari de proteină și legume.</p>
+                        
+                        <p><strong>Sfaturi importante:</strong></p>
+                        <ul>
+                            <li>Bea 2-3 litri de apă zilnic</li>
+                            <li>Evită zahărul adăugat și alimentele procesate</li>
+                            <li>Fă 30 min de mers pe jos zilnic</li>
+                            <li>Cântărește-te o dată pe săptămână, dimineața</li>
+                        </ul>
+                    `
+                },
+                'maintenance': {
+                    title: 'Plan Detaliat pentru Menținere',
+                    details: `
+                        <h3>Plan Zilnic Echilibrat (1800-2200 cal/zi)</h3>
+                        <p><strong>Exemplu de zi:</strong></p>
+                        <ul>
+                            <li>Mic dejun: Omletă (2 ouă) + legume + pâine integrală + avocado (480 cal)</li>
+                            <li>Gustare: Smoothie (banană + spanac + lapte de cocos + proteină) (280 cal)</li>
+                            <li>Prânz: Quinoa (80g) + legume la grătar + tofu/pui (120g) (580 cal)</li>
+                            <li>Gustare: Mix de nuci (30g) + fructe uscate (20g) (320 cal)</li>
+                            <li>Cină: Carne slabă (120g) + cartofi dulci + salată verde (540 cal)</li>
+                        </ul>
+                        
+                        <h3>Principii de bază:</h3>
+                        <ul>
+                            <li>50% carbohidrați complecși</li>
+                            <li>25% proteine de calitate</li>
+                            <li>25% grăsimi sănătoase</li>
+                            <li>Minimum 5 porții fructe/legume zilnic</li>
+                        </ul>
+                        
+                        <p><strong>Flexibilitate:</strong> Poți înlocui alimentele cu altele similare din aceeași categorie.</p>
+                    `
+                },
+                'muscle-gain': {
+                    title: 'Plan Detaliat pentru Creșterea Masei Musculare',
+                    details: `
+                        <h3>Plan Intensiv (2500-3000 cal/zi)</h3>
+                        <p><strong>Exemplu de zi:</strong></p>
+                        <ul>
+                            <li>Mic dejun: Ovăz (80g) + banană + unt de arahide + lapte (650 cal)</li>
+                            <li>Gustare: Shake proteic + banană + ovăz (420 cal)</li>
+                            <li>Prânz: Paste integrale (100g) + carne tocată slabă + sos + parmezan (750 cal)</li>
+                            <li>Pre-antrenament: Banană + cafea (150 cal)</li>
+                            <li>Post-antrenament: Shake proteic + mere (300 cal)</li>
+                            <li>Cină: Somon (150g) + orez brun + legume + ulei de măsline (730 cal)</li>
+                        </ul>
+                        
+                        <h3>Timing-ul meselor:</h3>
+                        <ul>
+                            <li>Mănâncă la fiecare 3-4 ore</li>
+                            <li>Proteină în fiecare masă (25-40g)</li>
+                            <li>Carbohidrați înainte și după antrenament</li>
+                            <li>Cină bogată în proteină pentru recuperare nocturnă</li>
+                        </ul>
+                        
+                        <p><strong>Suplimente recomandate:</strong> Proteină whey, creatină, multivitamine, omega-3</p>
+                    `
+                }
+            };
+            
+            const plan = plans[planType];
+            if (plan) {
+                alert(plan.title + '\n\n' + plan.details.replace(/<[^>]*>/g, '').replace(/&bull;/g, '•'));
+            }
+        }
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'988c839966d7e451',t:'MTc1OTQ5NTI5MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
